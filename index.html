@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Çift Form → WhatsApp</title>
+  <style>
+    body{
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      margin: 24px;
+      background:#f6f7fb;
+      color:#111;
+    }
+    h1{font-size:20px;margin-bottom:12px;}
+    .wrap{
+      display:flex;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+    .card{
+      background:#fff;
+      border-radius:12px;
+      box-shadow:0 6px 18px rgba(0,0,0,.06);
+      padding:16px;
+      width:min(420px, 100%);
+      flex:1;
+    }
+    .card h2{
+      font-size:16px;
+      margin:0 0 12px 0;
+    }
+    label{display:block;font-size:13px;margin-top:10px;}
+    input, textarea, select{
+      width:100%;
+      padding:10px 12px;
+      margin-top:6px;
+      border:1px solid #d7dbe7;
+      border-radius:8px;
+      font-size:14px;
+      outline:none;
+    }
+    textarea{min-height:80px;resize:vertical;}
+    .row{
+      display:flex; gap:8px;
+    }
+    .row > *{flex:1;}
+    button{
+      margin-top:12px;
+      width:100%;
+      padding:12px;
+      border:none;
+      border-radius:10px;
+      font-weight:600;
+      font-size:14px;
+      cursor:pointer;
+      background:#25D366;
+      color:white;
+    }
+    button.secondary{
+      background:#111827;
+    }
+    .hint{
+      font-size:12px;
+      opacity:.7;
+      margin-top:6px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>2 Form Yan Yana → WhatsApp Mesajı</h1>
+
+<div class="wrap">
+
+  <!-- FORM 1 -->
+  <div class="card">
+    <h2>Form 1: Kişi Bilgileri</h2>
+
+    <label>Ad Soyad</label>
+    <input id="f1_name" type="text" placeholder="Örn: Ali Veli" />
+
+    <label>Telefon</label>
+    <input id="f1_phone" type="tel" placeholder="Örn: 05xx..." />
+
+    <label>Not</label>
+    <textarea id="f1_note" placeholder="Ek bilgi..."></textarea>
+
+    <button onclick="sendWhatsAppForm1()">WhatsApp'tan Gönder</button>
+    <div class="hint">Butona basınca WhatsApp açılır, mesaj hazır gelir.</div>
+  </div>
+
+  <!-- FORM 2 -->
+  <div class="card">
+    <h2>Form 2: Sipariş / Talep</h2>
+
+    <label>Ürün</label>
+    <input id="f2_product" type="text" placeholder="Örn: Paket A" />
+
+    <div class="row">
+      <div>
+        <label>Adet</label>
+        <input id="f2_qty" type="number" min="1" value="1" />
+      </div>
+      <div>
+        <label>Öncelik</label>
+        <select id="f2_priority">
+          <option value="Normal">Normal</option>
+          <option value="Acil">Acil</option>
+          <option value="Çok Acil">Çok Acil</option>
+        </select>
+      </div>
+    </div>
+
+    <label>Adres</label>
+    <textarea id="f2_address" placeholder="Teslimat adresi..."></textarea>
+
+    <button class="secondary" onclick="sendWhatsAppForm2()">WhatsApp'tan Gönder</button>
+    <div class="hint">Telefon / WhatsApp Web üzerinden “Gönder”e tıklarsın.</div>
+  </div>
+
+</div>
+
+<script>
+  // BURAYA NUMARAYI YAZ:
+  const PHONE_NUMBER = "90XXXXXXXXXX"; // örn: 905551112233
+
+  function openWhatsApp(message){
+    const url = "https://wa.me/" + PHONE_NUMBER + "?text=" + encodeURIComponent(message);
+    window.open(url, "_blank");
+  }
+
+  function sendWhatsAppForm1(){
+    const name  = document.getElementById("f1_name").value.trim();
+    const phone = document.getElementById("f1_phone").value.trim();
+    const note  = document.getElementById("f1_note").value.trim();
+
+    const msg =
+`📌 FORM 1 - Kişi Bilgileri
+Ad Soyad: ${name || "-"}
+Telefon: ${phone || "-"}
+Not: ${note || "-"}`;
+
+    openWhatsApp(msg);
+  }
+
+  function sendWhatsAppForm2(){
+    const product  = document.getElementById("f2_product").value.trim();
+    const qty      = document.getElementById("f2_qty").value.trim();
+    const priority = document.getElementById("f2_priority").value;
+    const address  = document.getElementById("f2_address").value.trim();
+
+    const msg =
+`🛒 FORM 2 - Sipariş / Talep
+Ürün: ${product || "-"}
+Adet: ${qty || "-"}
+Öncelik: ${priority}
+Adres: ${address || "-"}`;
+
+    openWhatsApp(msg);
+  }
+</script>
+
+</body>
+</html>
