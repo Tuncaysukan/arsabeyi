@@ -1,164 +1,328 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Çift Form → WhatsApp</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ar&ccedil;evre Arsası - Satış ve Satın Alma</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    body{
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      margin: 24px;
-      background:#f6f7fb;
-      color:#111;
+    :root {
+      --primary-color: #25D366;
+      --secondary-color: #111827;
+      --background-color: #f0f2f5;
+      --card-background: #ffffff;
+      --text-color: #333333;
+      --border-radius: 12px;
+      --box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
     }
-    h1{font-size:20px;margin-bottom:12px;}
-    .wrap{
-      display:flex;
-      gap:16px;
-      flex-wrap:wrap;
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    .card{
-      background:#fff;
-      border-radius:12px;
-      box-shadow:0 6px 18px rgba(0,0,0,.06);
-      padding:16px;
-      width:min(420px, 100%);
-      flex:1;
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      padding: 20px;
     }
-    .card h2{
-      font-size:16px;
-      margin:0 0 12px 0;
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 20px;
     }
-    label{display:block;font-size:13px;margin-top:10px;}
-    input, textarea, select{
-      width:100%;
-      padding:10px 12px;
-      margin-top:6px;
-      border:1px solid #d7dbe7;
-      border-radius:8px;
-      font-size:14px;
-      outline:none;
+
+    h1 {
+      font-size: 2rem;
+      color: var(--secondary-color);
+      margin-bottom: 10px;
     }
-    textarea{min-height:80px;resize:vertical;}
-    .row{
-      display:flex; gap:8px;
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: #666;
     }
-    .row > *{flex:1;}
-    button{
-      margin-top:12px;
-      width:100%;
-      padding:12px;
-      border:none;
-      border-radius:10px;
-      font-weight:600;
-      font-size:14px;
-      cursor:pointer;
-      background:#25D366;
-      color:white;
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
     }
-    button.secondary{
-      background:#111827;
+
+    .form-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      justify-content: center;
     }
-    .hint{
-      font-size:12px;
-      opacity:.7;
-      margin-top:6px;
+
+    .card {
+      background: var(--card-background);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      padding: 25px;
+      width: 100%;
+      max-width: 500px;
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .card h2 {
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      color: var(--secondary-color);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #444;
+    }
+
+    .input-with-icon {
+      position: relative;
+    }
+
+    .input-with-icon i {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #777;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 12px 12px 12px 40px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: var(--transition);
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--primary-color);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.2);
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .row {
+      display: flex;
+      gap: 15px;
+    }
+
+    .row > * {
+      flex: 1;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #1da851;
+    }
+
+    .btn-secondary {
+      background-color: var(--secondary-color);
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background-color: #000;
+    }
+
+    .hint {
+      font-size: 0.85rem;
+      color: #777;
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .form-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .card {
+        width: 100%;
+        max-width: 100%;
+      }
+      
+      .row {
+        flex-direction: column;
+        gap: 0;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <header>
+      <h1><i class="fas fa-leaf"></i> Arsa beyi</h1>
+      <p class="subtitle">Arsa Satış ve Satın Alma Formları</p>
+    </header>
 
-<h1>2 Form Yan Yana → WhatsApp Mesajı</h1>
+    <div class="form-container">
+      <!-- FORM 1: Satmak İstiyorum -->
+      <div class="card">
+        <h2><i class="fas fa-home"></i> Satmak İstiyorum</h2>
+        <div class="form-group">
+          <label for="f1_name">Ad Soyad</label>
+          <div class="input-with-icon">
+            <i class="fas fa-user"></i>
+            <input id="f1_name" type="text" placeholder="Adınızı ve soyadınızı girin">
+          </div>
+        </div>
 
-<div class="wrap">
+        <div class="form-group">
+          <label for="f1_phone">Telefon</label>
+          <div class="input-with-icon">
+            <i class="fas fa-phone"></i>
+            <input id="f1_phone" type="tel" placeholder="Telefon numaranızı girin">
+          </div>
+        </div>
 
-  <!-- FORM 1 -->
-  <div class="card">
-    <h2>Form 1: Kişi Bilgileri</h2>
+        <div class="form-group">
+          <label for="f1_note">Not</label>
+          <div class="input-with-icon">
+            <i class="fas fa-comment"></i>
+            <textarea id="f1_note" placeholder="Arsanızla ilgili detayları yazın"></textarea>
+          </div>
+        </div>
 
-    <label>Ad Soyad</label>
-    <input id="f1_name" type="text" placeholder="Örn: Ali Veli" />
-
-    <label>Telefon</label>
-    <input id="f1_phone" type="tel" placeholder="Örn: 05xx..." />
-
-    <label>Not</label>
-    <textarea id="f1_note" placeholder="Ek bilgi..."></textarea>
-
-    <button onclick="sendWhatsAppForm1()">WhatsApp'tan Gönder</button>
-    <div class="hint">Butona basınca WhatsApp açılır, mesaj hazır gelir.</div>
-  </div>
-
-  <!-- FORM 2 -->
-  <div class="card">
-    <h2>Form 2: Sipariş / Talep</h2>
-
-    <label>Ürün</label>
-    <input id="f2_product" type="text" placeholder="Örn: Paket A" />
-
-    <div class="row">
-      <div>
-        <label>Adet</label>
-        <input id="f2_qty" type="number" min="1" value="1" />
+        <button class="btn-primary" onclick="sendWhatsAppForm1()">
+          <i class="fab fa-whatsapp"></i> WhatsApp ile Gönder
+        </button>
+        <div class="hint">Butona tıklayınca WhatsApp otomatik olarak açılacak ve mesajınız hazırlanmış olacak.</div>
       </div>
-      <div>
-        <label>Öncelik</label>
-        <select id="f2_priority">
-          <option value="Normal">Normal</option>
-          <option value="Acil">Acil</option>
-          <option value="Çok Acil">Çok Acil</option>
-        </select>
+
+      <!-- FORM 2: Satın Almak İstiyorum -->
+      <div class="card">
+        <h2><i class="fas fa-shopping-cart"></i> Satın Almak İstiyorum</h2>
+        <div class="form-group">
+          <label for="f2_product">İlgilenmek İstediğiniz İlçe</label>
+          <div class="input-with-icon">
+            <i class="fas fa-map-marker-alt"></i>
+            <input id="f2_product" type="text" placeholder="İlçe adını girin">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <label for="f2_qty">Bütçe (TL)</label>
+            <div class="input-with-icon">
+              <i class="fas fa-lira-sign"></i>
+              <input id="f2_qty" type="number" min="1" value="1">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="f2_priority">Öncelik</label>
+            <div class="input-with-icon">
+              <i class="fas fa-exclamation-circle"></i>
+              <select id="f2_priority">
+                <option value="Normal">Normal</option>
+                <option value="Acil">Acil</option>
+                <option value="Çok Acil">Çok Acil</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="f2_address">Adres</label>
+          <div class="input-with-icon">
+            <i class="fas fa-map-marker-alt"></i>
+            <textarea id="f2_address" placeholder="İletişim adresinizi girin"></textarea>
+          </div>
+        </div>
+
+        <button class="btn-secondary" onclick="sendWhatsAppForm2()">
+          <i class="fab fa-whatsapp"></i> WhatsApp ile Gönder
+        </button>
+        <div class="hint">Telefon / WhatsApp Web üzerinden "Gönder"e tıklayın.</div>
       </div>
     </div>
 
-    <label>Adres</label>
-    <textarea id="f2_address" placeholder="Teslimat adresi..."></textarea>
-
-    <button class="secondary" onclick="sendWhatsAppForm2()">WhatsApp'tan Gönder</button>
-    <div class="hint">Telefon / WhatsApp Web üzerinden “Gönder”e tıklarsın.</div>
+    <footer>
+      <p>İletişim: <i class="fab fa-whatsapp"></i> +90 533 592 08 88</p>
+    </footer>
   </div>
 
-</div>
+  <script>
+    // WhatsApp numarası
+    const PHONE_NUMBER = "905335920888";
 
-<script>
-  // BURAYA NUMARAYI YAZ:
-  const PHONE_NUMBER = "90XXXXXXXXXX"; // örn: 905551112233
+    function openWhatsApp(message) {
+      const url = "https://wa.me/" + PHONE_NUMBER + "?text=" + encodeURIComponent(message);
+      window.open(url, "_blank");
+    }
 
-  function openWhatsApp(message){
-    const url = "https://wa.me/" + PHONE_NUMBER + "?text=" + encodeURIComponent(message);
-    window.open(url, "_blank");
-  }
+    function sendWhatsAppForm1() {
+      const name = document.getElementById("f1_name").value.trim();
+      const phone = document.getElementById("f1_phone").value.trim();
+      const note = document.getElementById("f1_note").value.trim();
 
-  function sendWhatsAppForm1(){
-    const name  = document.getElementById("f1_name").value.trim();
-    const phone = document.getElementById("f1_phone").value.trim();
-    const note  = document.getElementById("f1_note").value.trim();
+      const msg = `🏠 SATMAK İSTİYORUM\n\nAd Soyad: ${name || "-"}\nTelefon: ${phone || "-"}\nNot: ${note || "-"}`;
 
-    const msg =
-`📌 FORM 1 - Kişi Bilgileri
-Ad Soyad: ${name || "-"}
-Telefon: ${phone || "-"}
-Not: ${note || "-"}`;
+      openWhatsApp(msg);
+    }
 
-    openWhatsApp(msg);
-  }
+    function sendWhatsAppForm2() {
+      const product = document.getElementById("f2_product").value.trim();
+      const qty = document.getElementById("f2_qty").value.trim();
+      const priority = document.getElementById("f2_priority").value;
+      const address = document.getElementById("f2_address").value.trim();
 
-  function sendWhatsAppForm2(){
-    const product  = document.getElementById("f2_product").value.trim();
-    const qty      = document.getElementById("f2_qty").value.trim();
-    const priority = document.getElementById("f2_priority").value;
-    const address  = document.getElementById("f2_address").value.trim();
+      const msg = `🛒 SATIN ALMAK İSTİYORUM\n\nİlçe: ${product || "-"}\nBütçe: ${qty || "-"} TL\nÖncelik: ${priority}\nAdres: ${address || "-"}`;
 
-    const msg =
-`🛒 FORM 2 - Sipariş / Talep
-Ürün: ${product || "-"}
-Adet: ${qty || "-"}
-Öncelik: ${priority}
-Adres: ${address || "-"}`;
-
-    openWhatsApp(msg);
-  }
-</script>
-
+      openWhatsApp(msg);
+    }
+  </script>
 </body>
 </html>
